@@ -4,8 +4,8 @@ import ky from 'ky'
 
 export async function GET(request: Request) {
   try {
-    const requestUrl = new URL(request.url)
-    const endpoint = apiUrl + requestUrl.search
+    const forwardedUri = request.headers.get('x-forwarded-uri') || ''
+    const endpoint = `${apiUrl}${forwardedUri}`
 
     const response = await ky(endpoint).json()
 
