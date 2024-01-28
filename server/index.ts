@@ -19,7 +19,7 @@ export default async function getProducts(
       queryParams.append(priceFilter.code, priceFilter.value)
     }
 
-    const apiUrl = `/api?${queryParams.toString()}`
+    const apiUrl = `/api?${decodeURIComponent(queryParams.toString())}`
 
     return await ky.get(apiUrl).json()
   } catch (err) {
