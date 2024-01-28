@@ -1,5 +1,5 @@
 import { Data, FilterParams } from '@/types'
-import { apiUrl } from '@/config'
+import { sportsNutritionFilterURL } from '@/config'
 import ky from 'ky'
 
 export default async function getProducts(
@@ -7,21 +7,21 @@ export default async function getProducts(
   priceFilter?: FilterParams
 ): Promise<Data | undefined> {
   try {
-    let url = apiUrl
+    const queryParams = new URLSearchParams(sportsNutritionFilterURL)
 
-    if (filters && filters.length > 0) {
-      filters.forEach((filter) => {
-        if (filter.code && filter.value) {
-          url += `&${filter.code}[]=${filter.value}`
-        }
-      })
-    }
+    filters?.forEach((filter) => {
+      if (filter.code && filter.value) {
+        queryParams.append(`${filter.code}[]`, filter.value)
+      }
+    })
 
     if (priceFilter?.code && priceFilter?.value) {
-      url += `&${priceFilter.code}=${priceFilter.value}`
+      queryParams.append(priceFilter.code, priceFilter.value)
     }
 
-    return await ky(url).json()
+    const apiUrl = `/api?${queryParams.toString()}`
+
+    return await ky.get(apiUrl).json()
   } catch (err) {
     console.error(err)
     return undefined
