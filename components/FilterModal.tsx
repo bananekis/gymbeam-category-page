@@ -41,10 +41,14 @@ const FilterModal = () => {
   const handleClear = () => {
     setCheckedFilters([])
     setCheckedPriceFilter(initialPriceFilter)
+    setIsModalOpen(false)
   }
 
   const handlePriceUpdate = useCallback(
-    (filter: FilterParams) => setCheckedPriceFilter(filter),
+    (filter: FilterParams) => {
+      setCheckedPriceFilter(filter)
+      setIsModalOpen(false)
+    },
     [setCheckedPriceFilter]
   )
 
@@ -59,6 +63,7 @@ const FilterModal = () => {
           : // add filter if it is not checked
             [...prevFilters, filter]
       )
+      setIsModalOpen(false)
     },
     [setCheckedFilters]
   )
@@ -77,7 +82,6 @@ const FilterModal = () => {
   }, [isModalOpen])
 
   useEffect(() => {
-    setIsModalOpen((prevIsModalOpen) => !prevIsModalOpen)
     refetch()
   }, [checkedFilters, checkedPriceFilter, refetch])
 
