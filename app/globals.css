@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .select-search-container {
+    width: 100%;
+  }
+}
+
+.select-search-input {
+  font-size: 13px;
+  height: 25px;
+  padding: 0 40px 0 10px;
+  background-color: white;
+  border: 1px solid #e2e8f0;
+}
+
+.select-search-is-highlighted,
+.select-search-option:not(.select-search-is-selected):hover {
+  background-color: #edf2f7;
+}
+
+.select-search-select {
+  background-color: white;
+}
+
+.select-search-option {
+  font-size: 13px;
+  height: 30px;
+  color: black;
+}
+
+.select-search-container:not(.select-search-is-disabled) .select-search-input:hover,
+.select-search-has-focus .select-search-select {
+  border-color: #e2e8f0;
+}
+
+.select-search-container:not(.select-search-is-multiple) .select-search-select {
+  top: 28px;
+  border-radius: 4px;
+}
