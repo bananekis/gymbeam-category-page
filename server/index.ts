@@ -17,7 +17,7 @@ export default async function getProducts(
       })
     }
 
-    if (priceFilter) {
+    if (priceFilter?.code && priceFilter?.value) {
       url += `&${priceFilter.code}=${priceFilter.value}`
     }
 
